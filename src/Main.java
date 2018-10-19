@@ -43,8 +43,8 @@ public class Main extends Application {
         menuImporter.getItems().addAll(itemLignes, itemRegions, itemBarres);
         Menu menuExporter = new Menu("Exporter");
         MenuItem itemPNG = new MenuItem("PNG");
-        MenuItem itemTIFF = new MenuItem("TIFF");
-        menuExporter.getItems().addAll(itemPNG, itemTIFF);
+        MenuItem itemGIF = new MenuItem("GIF");
+        menuExporter.getItems().addAll(itemPNG, itemGIF);
         MenuBar menuBar = new MenuBar(menuImporter, menuExporter);
         borderPane.setTop(menuBar);
 
@@ -76,7 +76,7 @@ public class Main extends Application {
             borderPane.setCenter(graphBarres(parts[0], parts[1]));
         });
         itemPNG.setOnAction(event -> saveAsPng(scene));
-        itemTIFF.setOnAction(event -> saveAsTiff(scene));
+        itemGIF.setOnAction(event -> saveAsGif(scene));
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -173,11 +173,11 @@ public class Main extends Application {
         }
     }
 
-    private void saveAsTiff(Scene scene) {
+    private void saveAsGif(Scene scene) {
         WritableImage image = scene.snapshot(null);
-        File file = saveFile(new FileChooser.ExtensionFilter("Fichiers TIFF", "*.tiff"));
+        File file = saveFile(new FileChooser.ExtensionFilter("Fichiers GIF", "*.gif"));
         try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "tiff", file);
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "gif", file);
         } catch (IOException e) {
             e.printStackTrace();
         }
